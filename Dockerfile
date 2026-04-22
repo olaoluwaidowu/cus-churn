@@ -21,11 +21,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # ── Copy application code ─────────────────────────────────────────────────────
 COPY . .
 
-# ── Train & save the model at build time ──────────────────────────────────────
-# This bakes the model/rf_pipeline.pkl into the image so no training
-# is needed at runtime on Render.
-RUN python train_model.py
-
 # ── Expose Render's default port ─────────────────────────────────────────────
 EXPOSE 10000
 

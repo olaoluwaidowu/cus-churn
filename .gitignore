@@ -3,7 +3,7 @@ __pycache__/
 .DS_Store
 .venv/
 venv/
-model/rf_pipeline.pkl     # baked into Docker image at build time; not needed in repo
+# model/rf_pipeline.pkl is committed to the repo so Docker can use it without retraining
 build/
 dist/
 .ipynb_checkpoints/
