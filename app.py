@@ -275,7 +275,7 @@ div[data-testid="stNumberInput"] button {
 /* ── Button ── */
 .stButton > button {
     background: linear-gradient(90deg, #6d28d9, #2563eb);
-    color: white;
+    color: #ffffff !important;
     border: none;
     border-radius: 12px;
     padding: 14px 32px;
@@ -289,6 +289,12 @@ div[data-testid="stNumberInput"] button {
 .stButton > button:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 28px rgba(109,40,217,0.65);
+}
+/* Force button text/icon colour */
+.stButton > button p,
+.stButton > button span,
+.stButton > button * {
+    color: #ffffff !important;
 }
 
 /* ── Divider ── */
