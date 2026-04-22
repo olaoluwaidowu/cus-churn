@@ -233,18 +233,18 @@ ul[data-baseweb="menu"] li:hover {
     background: rgba(167,139,250,0.2) !important;
 }
 
-/* Number input — box and typed value (Charges section: dark text on light bg) */
+/* Number input — dark background with light text (matches rest of form) */
 div[data-testid="stNumberInput"] input,
 .stNumberInput input {
-    background: rgba(255,255,255,0.92) !important;
-    border-color: rgba(255,255,255,0.4) !important;
-    color: #111827 !important;
+    background: rgba(255,255,255,0.09) !important;
+    border-color: rgba(255,255,255,0.22) !important;
+    color: #f1f5f9 !important;
     border-radius: 10px !important;
 }
 /* Number input stepper buttons */
 div[data-testid="stNumberInput"] button {
-    color: #111827 !important;
-    background: rgba(255,255,255,0.7) !important;
+    color: #f1f5f9 !important;
+    background: rgba(255,255,255,0.1) !important;
 }
 
 /* Slider — track label and value */
@@ -398,8 +398,8 @@ with st.form("prediction_form"):
         # Account Info
         st.markdown("<div class='section-card'>", unsafe_allow_html=True)
         st.markdown("<div class='section-title'>📋 Account Details</div>", unsafe_allow_html=True)
-        tenure = st.slider("Tenure (months)", min_value=0, max_value=72, value=12,
-                           help="Number of months the customer has stayed")
+        tenure = st.number_input("Tenure (months)", min_value=0, max_value=72, value=12,
+                                step=1, help="Number of months the customer has stayed")
         c1, c2 = st.columns(2)
         with c1:
             contract = st.selectbox("Contract Type", ["Month-to-month", "One year", "Two year"])
