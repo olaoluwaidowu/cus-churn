@@ -164,10 +164,10 @@ docker run
 
 ---
 
-## 📊 Dataset
+## 📊 Dataset & Notebook Source
 
 **IBM Telco Customer Churn Dataset**  
-Source: [IBM Sample Datasets / Kaggle](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
+Notebook & Dataset Source: [Customer Churn Prediction — Kaggle](https://www.kaggle.com/code/bhartiprasad17/customer-churn-prediction)
 
 - 7,043 customers · 21 features
 - Target variable: `Churn` (Yes / No)
