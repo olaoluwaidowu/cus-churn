@@ -6,12 +6,12 @@ services:
     name: churn-predictor-group1
     runtime: docker
     dockerfilePath: ./Dockerfile
-    region: oregon          # free tier region
+    region: oregon
     plan: free
     envVars:
       - key: STREAMLIT_SERVER_HEADLESS
         value: "true"
       - key: STREAMLIT_BROWSER_GATHER_USAGE_STATS
         value: "false"
-    healthCheckPath: /      # Render pings this to confirm the app is up
+    healthCheckPath: /_stcore/health
     autoDeploy: true        # auto-redeploy on every push to main branch

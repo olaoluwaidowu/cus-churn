@@ -25,15 +25,12 @@ COPY . .
 EXPOSE 10000
 
 # ── Streamlit config for headless / containerised environments ────────────────
-ENV STREAMLIT_SERVER_PORT=10000 \
-    STREAMLIT_SERVER_ADDRESS=0.0.0.0 \
+ENV STREAMLIT_SERVER_ADDRESS=0.0.0.0 \
     STREAMLIT_SERVER_HEADLESS=true \
     STREAMLIT_BROWSER_GATHER_USAGE_STATS=false \
     STREAMLIT_SERVER_ENABLE_CORS=false \
-    STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION=false
+    STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION=false \
+    PORT=10000
 
-# ── Launch ────────────────────────────────────────────────────────────────────
-CMD ["streamlit", "run", "app.py", \
-     "--server.port=10000", \
-     "--server.address=0.0.0.0", \
-     "--server.headless=true"]
+# ── Launch (shell form so $PORT is expanded at runtime) ─────────────────────
+CMD streamlit run app.py --server.port=$PORT --server.address=0.0.0.0 --server.headless=true
