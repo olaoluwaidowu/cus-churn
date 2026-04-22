@@ -1,0 +1,86 @@
+name: Build Windows Installer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "desktop/**"
+      - "model/**"
+      - ".github/workflows/build-desktop.yml"
+  workflow_dispatch:   # allow manual trigger from GitHub UI
+
+jobs:
+  build:
+    name: PyInstaller + Inno Setup → Windows .exe
+    runs-on: windows-latest
+
+    steps:
+      # ── 1. Checkout ─────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── 2. Python setup ──────────────────────────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      # ── 3. Install Python dependencies ───────────────────────────────────
+      - name: Install app dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r desktop/requirements.txt
+          pip install pyinstaller
+
+      # ── 4. Build with PyInstaller ─────────────────────────────────────────
+      - name: Build executable with PyInstaller
+        working-directory: desktop
+        run: pyinstaller build.spec --distpath ../dist --workpath ../build --clean
+
+      # ── 5. Install Inno Setup ─────────────────────────────────────────────
+      - name: Install Inno Setup
+        run: choco install innosetup --yes --no-progress
+
+      # ── 6. Create installer directory ─────────────────────────────────────
+      - name: Create installer output directory
+        run: mkdir -p installer_output
+
+      # ── 7. Compile Inno Setup installer ───────────────────────────────────
+      - name: Compile Inno Setup installer
+        run: |
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" desktop\installer.iss
+        shell: powershell
+
+      # ── 8. Upload installer as build artifact ─────────────────────────────
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ChurnPredictor-Windows-Installer
+          path: installer_output\ChurnPredictor_Setup_v1.0.0.exe
+          retention-days: 30
+
+      # ── 9. Create a GitHub Release on version tags ─────────────────────────
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: installer_output\ChurnPredictor_Setup_v1.0.0.exe
+          name: "Churn Predictor ${{ github.ref_name }}"
+          body: |
+            ## 📡 Churn Predictor — Windows Installer
+
+            **MIT807: Artificial Intelligence & Its Business Applications**
+            **GROUP 1**
+
+            ### Installation
+            1. Download `ChurnPredictor_Setup_v1.0.0.exe`
+            2. Run the installer (no admin rights required)
+            3. Launch **Churn Predictor** from your desktop or Start Menu
+
+            ### Model
+            - Algorithm: Random Forest (500 trees)
+            - Test Accuracy: ~81.4%
+            - Dataset: IBM Telco Customer Churn
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

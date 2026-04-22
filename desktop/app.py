@@ -18,8 +18,14 @@ ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
-BASE_DIR   = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "..", "model", "rf_pipeline.pkl")
+# When frozen by PyInstaller, files are extracted to sys._MEIPASS.
+# When running normally (dev), the model sits one level up.
+if getattr(sys, "frozen", False):
+    BASE_DIR = sys._MEIPASS
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+MODEL_PATH = os.path.join(BASE_DIR, "model", "rf_pipeline.pkl")
 
 # ══════════════════════════════════════════════════════════════════════════════
 # HELPERS
