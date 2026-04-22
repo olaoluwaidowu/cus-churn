@@ -50,7 +50,7 @@ def make_dropdown(parent, values, width=180):
     )
 
 
-def make_entry(parent, placeholder="", width=180):
+def make_entry(parent, placeholder="", width=200):
     return ctk.CTkEntry(
         parent, placeholder_text=placeholder, width=width,
         fg_color="#1e1b4b", border_color="#4c1d95",
@@ -112,7 +112,7 @@ class ChurnApp(ctk.CTk):
 
         badge = ctk.CTkLabel(hero,
                              text="📡  MIT807 · Artificial Intelligence & Its Business Applications",
-                             font=("Inter", 11), text_color="rgba(255,255,255,0.75)")
+                             font=("Inter", 11), text_color="#c4b5fd")
         badge.pack(anchor="w", padx=20, pady=(12, 0))
 
         ctk.CTkLabel(hero,
@@ -196,7 +196,7 @@ class ChurnApp(ctk.CTk):
         card2.pack(fill="x", pady=(0, 10))
 
         make_label(inner2, "Tenure (months)").pack(anchor="w", pady=(0, 2))
-        self.tenure = make_entry(inner2, placeholder="0 – 72", width=None)
+        self.tenure = make_entry(inner2, placeholder="0 – 72")
         self.tenure.pack(fill="x")
         self.tenure.insert(0, "12")
 
@@ -217,7 +217,7 @@ class ChurnApp(ctk.CTk):
         self.payment = make_dropdown(inner2, [
             "Electronic check", "Mailed check",
             "Bank transfer (automatic)", "Credit card (automatic)",
-        ], width=None)
+        ])
         self.payment.pack(fill="x")
 
         # Charges
@@ -230,12 +230,12 @@ class ChurnApp(ctk.CTk):
         row_ch.grid_columnconfigure(1, weight=1)
 
         make_label(row_ch, "Monthly Charges ($)").grid(row=0, column=0, sticky="w", pady=(0, 2))
-        self.monthly = make_entry(row_ch, placeholder="e.g. 65.00")
+        self.monthly = make_entry(row_ch, placeholder="e.g. 65.00", width=160)
         self.monthly.grid(row=1, column=0, sticky="ew", padx=(0, 6))
         self.monthly.insert(0, "65.00")
 
         make_label(row_ch, "Total Charges ($)").grid(row=0, column=1, sticky="w", pady=(0, 2))
-        self.total = make_entry(row_ch, placeholder="e.g. 780.00")
+        self.total = make_entry(row_ch, placeholder="e.g. 780.00", width=160)
         self.total.grid(row=1, column=1, sticky="ew")
         self.total.insert(0, "780.00")
 
@@ -264,7 +264,7 @@ class ChurnApp(ctk.CTk):
         card2.pack(fill="x", pady=(0, 10))
 
         make_label(inner2, "Internet Service").pack(anchor="w", pady=(0, 2))
-        self.internet = make_dropdown(inner2, ["DSL", "Fiber optic", "No"], width=None)
+        self.internet = make_dropdown(inner2, ["DSL", "Fiber optic", "No"])
         self.internet.pack(fill="x")
 
         row_i1 = ctk.CTkFrame(inner2, fg_color="transparent")
