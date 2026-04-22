@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+venv/
+model/rf_pipeline.pkl     # baked into Docker image at build time; not needed in repo
+build/
+dist/
+.ipynb_checkpoints/
+*.log
