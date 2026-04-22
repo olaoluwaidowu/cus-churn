@@ -233,18 +233,18 @@ ul[data-baseweb="menu"] li:hover {
     background: rgba(167,139,250,0.2) !important;
 }
 
-/* Number input — dark background with light text (matches rest of form) */
+/* Number input — light background with dark text for readability */
 div[data-testid="stNumberInput"] input,
 .stNumberInput input {
-    background: rgba(255,255,255,0.09) !important;
-    border-color: rgba(255,255,255,0.22) !important;
-    color: #f1f5f9 !important;
+    background: rgba(255,255,255,0.92) !important;
+    border-color: rgba(255,255,255,0.3) !important;
+    color: #111827 !important;
     border-radius: 10px !important;
 }
 /* Number input stepper buttons */
 div[data-testid="stNumberInput"] button {
-    color: #f1f5f9 !important;
-    background: rgba(255,255,255,0.1) !important;
+    color: #111827 !important;
+    background: rgba(255,255,255,0.7) !important;
 }
 
 /* Slider — track label and value */
